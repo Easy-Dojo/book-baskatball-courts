@@ -4,14 +4,18 @@ import {useMessageActions} from "./useMessageActions";
 import {selectMessage} from "./messageSlice";
 
 const Hello: React.FC = () => {
-    const {data} = useTypedSelector(selectMessage)
+    const {data, error} = useTypedSelector(selectMessage)
     const {fetchMessage} = useMessageActions()
 
     useEffect(()=>{
         fetchMessage();
     },[])
 
-    return <div><h1>{data}</h1></div>
+    console.log(error)
+    return <div>
+        <h1>{data}</h1>
+        <span>{error}</span>
+    </div>
 };
 
 export default Hello;
