@@ -8,7 +8,7 @@ interface RepositoriesState {
     data: string[];
 }
 
-const initialState = {
+export const initialState = {
     loading: false,
     error: undefined,
     data: []
