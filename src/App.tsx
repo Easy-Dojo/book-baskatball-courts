@@ -3,6 +3,7 @@ import {Provider} from "react-redux";
 import RepositoryList from "./features/repository/RepositoryList";
 import {store} from './app/store'
 import Hello from "./features/hello/Hello";
+import {Button} from "antd";
 
 const App: React.FC = () => {
     return <Provider store={store}>
