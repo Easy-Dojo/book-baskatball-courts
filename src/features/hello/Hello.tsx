@@ -11,10 +11,9 @@ const Hello: React.FC = () => {
         fetchMessage();
     },[])
 
-    console.log(error)
     return <div>
-        <h1>{data}</h1>
-        <span>{error}</span>
+        {data && <h1>{data}</h1>}
+        {error && <span>{error}</span>}
     </div>
 };
 

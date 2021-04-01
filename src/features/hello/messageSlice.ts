@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import bookVenueService from "../../app/http/bookVenueService";
 
-interface MessageState {
+export interface MessageState {
     loading: boolean;
     error: string | undefined;
     data: string | undefined;
