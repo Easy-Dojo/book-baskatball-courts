@@ -2,32 +2,26 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {RootState} from "../../app/store";
 
-
 interface RepositoriesState {
     loading: boolean;
-    error: string | null;
+    error: string | undefined;
     data: string[];
 }
 
 const initialState = {
     loading: false,
-    error: null,
+    error: undefined,
     data: []
 } as RepositoriesState;
 
-type PayloadType = string | string[];
-
-const fetchRepositories = createAsyncThunk("repositories/fetchRepositories", async (term: string): Promise<PayloadType> => {
-    try {
-        const {data} = await axios.get('https://registry.npmjs.org/-/v1/search', {
-            params: {
-                text: term
-            }
-        })
-        return data.objects.map((results: any) => results.package.name)
-    } catch (err) {
-        return err.message
-    }
+const fetchRepositories = createAsyncThunk("repositories/fetchRepositories", async (term: string) => {
+    const {data} = await axios.get('https://registry.npmjs.org/-/v1/search', {
+        params: {
+            text: term
+        }
+    })
+    const names = data.objects.map((results: any) => results.package.name);
+    return Promise.resolve(names)
 });
 
 export const repositoriesActionCreators = {fetchRepositories};
@@ -40,22 +34,19 @@ export const repositoriesSlice = createSlice({
         builder
             .addCase(fetchRepositories.pending, (state) => {
                 state.loading = true
-                state.error = null
+                state.error = undefined
                 state.data = []
             })
             .addCase(fetchRepositories.fulfilled, (state, action) => {
                 state.loading = false
-                state.error = null
-                // @ts-ignore
+                state.error = undefined
                 state.data = action.payload
             })
             .addCase(fetchRepositories.rejected, (state, action) => {
                 state.loading = false
-                // @ts-ignore
-                state.error = action.payload
+                state.error = action.error.message
                 state.data = []
             });
-
     },
 });
 

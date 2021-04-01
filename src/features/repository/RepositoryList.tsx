@@ -13,6 +13,8 @@ const RepositoryList: React.FC = () => {
         fetchRepositories(term);
     };
 
+    console.log({data, error, loading})
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
