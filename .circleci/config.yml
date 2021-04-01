@@ -19,7 +19,7 @@ jobs:
           command: |
             git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/sipu-basketball-web-staging.git master
 
-  deploy-prod:
+  deploy-to-prod:
     docker:
       - image: circleci/node:latest
     steps:
@@ -31,7 +31,7 @@ jobs:
 
 workflows:
   version: 2
-  test-build-deploy:
+  build-and-deploy:
     jobs:
       - run-unit-test
       - deploy-to-staging:
