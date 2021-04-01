@@ -7,9 +7,9 @@ const Hello: React.FC = () => {
     const {data, error} = useTypedSelector(selectMessage)
     const {fetchMessage} = useMessageActions()
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchMessage();
-    },[])
+    }, [])
 
     return <div>
         {data && <h1>{data}</h1>}
