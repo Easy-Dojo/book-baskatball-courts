@@ -1,7 +1,10 @@
 import React, {useState} from "react";
-import {Button, Form, Input, notification, Spin} from "antd";
-import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
+import {notification, Spin} from "antd";
 import axios from "axios";
+import './index.less';
+import Logo from "./logo/Logo";
+import LoginForm from "./loginForm/LoginForm";
+import Footer from "./footer/Footer";
 
 const Login: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -20,35 +23,12 @@ const Login: React.FC = () => {
     }
     return (
         <Spin spinning={loading}>
-            <Form
-                name="login"
-                onFinish={onFinish}
-            >
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[{required: true, message: 'Please input your username!'}]}
-                >
-                    <Input/>
-                </Form.Item>
-
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{required: true, message: 'Please input your password!'}]}
-                >
-                    <Input.Password
-                        iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-                    />
-                </Form.Item>
-
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+            <div className="container">
+                <Logo/>
+                <LoginForm onFinish={onFinish}/>
+                <Footer/>
+            </div>
         </Spin>
     )
 }
-export default Login
+export default Login;
