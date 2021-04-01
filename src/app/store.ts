@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import repositoriesReducer from "../features/repository/repositoriesSlice"
+import messageReducer from "../features/hello/messageSlice"
 
 export const store = configureStore({
     reducer: {
-        repositories: repositoriesReducer
+        repositories: repositoriesReducer,
+        message: messageReducer
     }
 })
 
