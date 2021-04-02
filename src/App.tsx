@@ -6,23 +6,26 @@ import {
     Route
 } from "react-router-dom";
 import {store} from './app/store'
-import {RouteList} from "./app/routes";
+import {Pages} from "./app/routes";
+import SecurityLayout from "./app/layouts/SecurityLayout";
 
 const App: React.FC = () => {
     return <Provider store={store}>
         <Router>
-            <Switch>
-                <Route
-                    exact
-                    path={RouteList.Home.path}
-                    component={RouteList.Home.component}
-                />
-                <Route
-                    exact
-                    path={RouteList.Login.path}
-                    component={RouteList.Login.component}
-                />
-            </Switch>
+            <SecurityLayout>
+                <Switch>
+                    <Route
+                        exact
+                        path={Pages.Home.path}
+                        component={Pages.Home.component}
+                    />
+                    <Route
+                        exact
+                        path={Pages.Login.path}
+                        component={Pages.Login.component}
+                    />
+                </Switch>
+            </SecurityLayout>
         </Router>
     </Provider>;
 };

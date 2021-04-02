@@ -8,7 +8,7 @@ interface RouterConfig {
   component: ComponentType<any>;
 }
 
-export class RouteList {
+export class Pages {
   public static readonly Home: RouterConfig = {
     title: "Home Page",
     path: '/',
