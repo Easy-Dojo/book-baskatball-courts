@@ -1,61 +1,57 @@
 import React from "react";
 import {Button, Form, Input} from "antd";
-import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
-import './LoginForm.less';
+import {EyeFilled} from '@ant-design/icons';
+import {AxiosBasicCredentials} from "axios";
 
 interface LoginFormProps {
-    onFinish(values: object): void
+    onFinish(values: AxiosBasicCredentials): void
 }
 
 const Username = () => (
     <Form.Item
         name="username"
-        rules={[{required: true, message: 'Please input your username!'}]}
+        rules={[{required: true, message: '请输入用户名!'}]}
     >
-        <Input
-            size="large"
-            placeholder="Username"
-        />
+        <Input size="large" placeholder="用户名"/>
     </Form.Item>
 );
 
 const Password = () => (
     <Form.Item
         name="password"
-        rules={[{required: true, message: 'Please input your password!'}]}
+        rules={[{required: true, message: '请输入密码'}]}
     >
         <Input.Password
             size="large"
-            placeholder="Password"
-            iconRender={visible => (visible ? <EyeTwoTone twoToneColor='#36CFCA'/> : <EyeInvisibleOutlined/>)}
+            type="password"
+            placeholder="密码"
+            iconRender={visible => (visible ? <EyeFilled style={{color: "#39C8C2"}}/> : <EyeFilled/>)}
         />
     </Form.Item>
 )
 
 const Submit = () => (
     <Form.Item>
-        <Button
-            size="large"
-            block={true}
-            type="primary"
-            htmlType="submit"
-        >
-            Submit
+        <Button size="large" type="primary" shape="round" htmlType="submit" className="login-form-button">
+            登录
         </Button>
     </Form.Item>
 );
 
 const LoginForm = ({onFinish}: LoginFormProps) => {
     return (
-        <Form
-            className="login-form"
-            name="login"
-            onFinish={onFinish}
-        >
-            <Username/>
-            <Password/>
-            <Submit/>
-        </Form>
+        <div className="login-index-main">
+            <Form
+                name="normal_login"
+                className="login-form"
+                initialValues={{remember: true}}
+                onFinish={onFinish}
+            >
+                <Username/>
+                <Password/>
+                <Submit/>
+            </Form>
+        </div>
     )
 }
 export default LoginForm;
