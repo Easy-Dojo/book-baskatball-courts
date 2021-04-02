@@ -7,8 +7,8 @@ class LoginService extends HttpClient {
     super(ENV.API_ENDPOINT);
   }
 
-  async authorize(authInfo: AxiosBasicCredentials): Promise<any> {
-    return await this.instance.post("/authorize", authInfo).then((res) => res.data);
+  async login(authInfo: AxiosBasicCredentials): Promise<any> {
+    return await this.instance.post("/api/authorize", authInfo).then((res) => res.data);
   }
 }
 

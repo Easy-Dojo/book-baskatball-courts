@@ -1,27 +1,21 @@
-import React, {useState} from "react";
-import {notification, Spin} from "antd";
-import axios, {AxiosBasicCredentials} from "axios";
+import React from "react";
+import {Spin} from "antd";
+import {AxiosBasicCredentials} from "axios";
 import Logo from "./logo/Logo";
 import LoginForm from "./loginForm/LoginForm";
 import Footer from "./footer/Footer";
+import {useAuthorizeActions} from "./useAuthorizeActions";
+import useLoginStateLoading from "./useLoginStateLoading";
 
 const Login: React.FC = () => {
-    const [loading, setLoading] = useState(false);
+    const loginIsLoading = useLoginStateLoading()
+    const {doLogin} = useAuthorizeActions()
     const onFinish = (values: AxiosBasicCredentials) => {
-        setLoading(true);
-        axios.post('/api/authorize', values).then(() => {
-            window.location.assign('/home');
-        }).catch(() => {
-            notification.open({
-                message: 'Login Failed',
-                description: 'Invalid username or password',
-            });
-        }).finally(() => {
-            setLoading(false);
-        });
+        doLogin(values);
     }
+
     return (
-        <Spin spinning={loading}>
+        <Spin spinning={loginIsLoading}>
             <div className="login-layout">
                 <Logo/>
                 <LoginForm onFinish={onFinish}/>
