@@ -4,8 +4,7 @@ import {AxiosBasicCredentials} from "axios";
 import Logo from "./logo/Logo";
 import LoginForm from "./loginForm/LoginForm";
 import Footer from "./footer/Footer";
-import {useAuthorizeActions} from "./useAuthorizeActions";
-import useLoginStateLoading from "./useLoginStateLoading";
+import {useAuthorizeActions, useLoginStateLoading} from "./hooks";
 
 const Login: React.FC = () => {
     const loginIsLoading = useLoginStateLoading()
