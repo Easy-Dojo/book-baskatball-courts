@@ -9,6 +9,7 @@ const Hello: React.FC = () => {
 
     useEffect(() => {
         fetchMessage();
+        // eslint-disable-next-line
     }, [])
 
     return <div>

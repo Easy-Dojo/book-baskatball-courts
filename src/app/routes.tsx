@@ -1,5 +1,5 @@
 import { ComponentType } from "react";
-import Hello from "../features/hello/Hello";
+import Home from "../features/home";
 import Login from "../features/login";
 
 interface RouterConfig {
@@ -9,10 +9,10 @@ interface RouterConfig {
 }
 
 export class RouteList {
-  public static readonly Hello: RouterConfig = {
-    title: "Hello Page",
-    path: `/`,
-    component: Hello,
+  public static readonly Home: RouterConfig = {
+    title: "Home Page",
+    path: '/',
+    component: Home,
   };
 
   public static readonly Login: RouterConfig = {

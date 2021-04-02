@@ -14,8 +14,8 @@ const App: React.FC = () => {
             <Switch>
                 <Route
                     exact
-                    path={RouteList.Hello.path}
-                    component={RouteList.Hello.component}
+                    path={RouteList.Home.path}
+                    component={RouteList.Home.component}
                 />
                 <Route
                     exact
