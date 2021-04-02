@@ -3,9 +3,11 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} fro
 export class HttpClient {
     instance: AxiosInstance;
 
-    constructor(baseURL: string) {
+    private readonly _baseURL = "./";
+
+    constructor(baseURL?: string) {
         this.instance = axios.create({
-            baseURL,
+            baseURL: baseURL || this._baseURL,
             headers: {"Content-Type": "application/json"},
         });
         this._initializeInterceptor();

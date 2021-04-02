@@ -1,12 +1,7 @@
-import ENV from "../../env";
 import {HttpClient} from "../../app/http/http-client";
 import {AxiosBasicCredentials} from "axios";
 
 class LoginService extends HttpClient {
-  constructor() {
-    super(ENV.API_ENDPOINT);
-  }
-
   async login(authInfo: AxiosBasicCredentials): Promise<any> {
     return await this.instance.post("/api/authorize", authInfo).then((res) => res.data);
   }

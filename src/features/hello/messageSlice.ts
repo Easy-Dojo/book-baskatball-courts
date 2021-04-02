@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import bookVenueService from "../../app/http/bookVenueService";
+import messageService from "./service";
 
 export interface MessageState {
     loading: boolean;
@@ -15,7 +15,7 @@ export const initialState = {
 } as MessageState
 
 const fetchMessage = createAsyncThunk("message/fetchMessage", async () => {
-    const {data} = await bookVenueService.hello()
+    const {data} = await messageService.hello()
     return data
 });
 
