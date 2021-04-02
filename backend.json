@@ -1,0 +1,82 @@
+{
+  "port": 8080,
+  "protocol": "http",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/authorize",
+            "body": {
+              "username": "yes",
+              "password": "yes"
+            },
+            "method": "POST"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": "OK"
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders",
+            "method": "POST"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": {
+              "order_id": 3,
+              "court_list": [
+                {
+                  "court": "A",
+                  "sub_court": "1",
+                  "hours": 3,
+                  "amount": 100
+                },
+                {
+                  "court": "B",
+                  "sub_court": "",
+                  "hours": 3,
+                  "amount": 100
+                }
+              ],
+              "time_discount": "",
+              "coupon": "XXXXXXXXXXXXXXX",
+              "amount": 200,
+              "amount_with_discount": 180
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400
+          }
+        }
+      ]
+    }
+  ]
+}
