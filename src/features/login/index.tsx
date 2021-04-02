@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {notification, Spin} from "antd";
 import axios, {AxiosBasicCredentials} from "axios";
-import './index.less';
 import Logo from "./logo/Logo";
 import LoginForm from "./loginForm/LoginForm";
 import Footer from "./footer/Footer";
