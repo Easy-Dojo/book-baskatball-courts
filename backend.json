@@ -28,8 +28,13 @@
       "predicates": [
         {
           "matches": {
-            "path": "/api/orders",
-            "method": "POST"
+            "path": "/api/courts",
+            "method": "GET",
+            "query": {
+              "date": "2021-05-01",
+              "startTime": 16,
+              "endTime": 20
+            }
           }
         }
       ],
@@ -38,25 +43,83 @@
           "is": {
             "statusCode": 200,
             "body": {
-              "order_id": 3,
-              "court_list": [
+              "date": "2021-05-01",
+              "startTime": 16,
+              "endTime": 20,
+              "courts": [
                 {
+                  "id": "A1",
                   "court": "A",
-                  "sub_court": "1",
-                  "hours": 3,
-                  "amount": 100
+                  "subCourt": 0,
+                  "isAvailable": true
                 },
                 {
+                  "id": "A2",
+                  "court": "A",
+                  "subCourt": 1,
+                  "isAvailable": false
+                },
+                {
+                  "id": "B1",
                   "court": "B",
-                  "sub_court": "",
-                  "hours": 3,
-                  "amount": 100
+                  "subCourt": 0,
+                  "isAvailable": true
+                },
+                {
+                  "id": "B2",
+                  "court": "B",
+                  "subCourt": 1,
+                  "isAvailable": false
+                },
+                {
+                  "id": "C1",
+                  "court": "C",
+                  "subCourt": 0,
+                  "isAvailable": true
+                },
+                {
+                  "id": "C2",
+                  "court": "C",
+                  "subCourt": 1,
+                  "isAvailable": false
+                },
+                {
+                  "id": "D1",
+                  "court": "D",
+                  "subCourt": 0,
+                  "isAvailable": true
+                },
+                {
+                  "id": "D2",
+                  "court": "D",
+                  "subCourt": 1,
+                  "isAvailable": false
+                },
+                {
+                  "id": "E1",
+                  "court": "E",
+                  "subCourt": 0,
+                  "isAvailable": true
+                },
+                {
+                  "id": "E2",
+                  "court": "E",
+                  "subCourt": 1,
+                  "isAvailable": false
+                },
+                {
+                  "id": "F1",
+                  "court": "F",
+                  "subCourt": 0,
+                  "isAvailable": true
+                },
+                {
+                  "id": "F2",
+                  "court": "F",
+                  "subCourt": 1,
+                  "isAvailable": false
                 }
-              ],
-              "time_discount": "",
-              "coupon": "XXXXXXXXXXXXXXX",
-              "amount": 200,
-              "amount_with_discount": 180
+              ]
             }
           }
         }
@@ -66,10 +129,26 @@
       "predicates": [
         {
           "matches": {
-            "path": "/"
+            "path": "/api/courts",
+            "method": "GET",
+            "query": {
+              "date": "2021-04-01",
+              "startTime": 16,
+              "endTime": 20
+            }
           }
         }
       ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "body": "Bad Request"
+          }
+        }
+      ]
+    },
+    {
       "responses": [
         {
           "is": {

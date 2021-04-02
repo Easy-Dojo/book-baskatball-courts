@@ -39,7 +39,7 @@
     "start": "yarn server",
     "dev": "concurrently yarn:frontend yarn:backend",
     "frontend": "craco start",
-    "backend": "concurrently mb \"sleep 2 && curl -X POST -d @backend.json http://localhost:2525/imposters\"",
+    "backend": "concurrently mb \"sleep 5 && curl -X POST -d @backend.json http://localhost:2525/imposters\"",
     "build": "craco build",
     "test": "craco test",
     "server": "node server.js"
