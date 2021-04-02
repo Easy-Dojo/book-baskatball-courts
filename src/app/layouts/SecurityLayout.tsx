@@ -13,7 +13,7 @@ const SecurityLayout: React.FC = ({children}) => {
         if (!isLogin && window.location.pathname !== Pages.Login.path) {
             history.push(Pages.Login.path)
         }
-    }, [isLogin])
+    }, [isLogin, history])
 
     return <Spin spinning={!isLogin && loading}>
         {children}

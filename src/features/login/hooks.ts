@@ -29,7 +29,7 @@ export const useHandleLoginStateChange = () => {
             });
             history.push(Pages.Home.path)
         }
-    }, [loginState])
+    }, [loginState, history])
 
     return null
 }
