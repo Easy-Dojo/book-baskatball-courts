@@ -1,4 +1,5 @@
 import { ComponentType } from "react";
+import BookCourt from "../features/book-court";
 import Home from "../features/home";
 import Login from "../features/login";
 
@@ -17,7 +18,13 @@ export class Pages {
 
   public static readonly Login: RouterConfig = {
     title: "Login Page",
-    path: `/login`,
+    path: '/login',
     component: Login,
+  };
+
+  public static readonly BookCourt: RouterConfig = {
+    title: "Book Court Page",
+    path: '/book-court',
+    component: BookCourt,
   };
 }

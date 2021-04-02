@@ -24,6 +24,11 @@ const App: React.FC = () => {
                         path={Pages.Login.path}
                         component={Pages.Login.component}
                     />
+                    <Route
+                        exact
+                        path={Pages.BookCourt.path}
+                        component={Pages.BookCourt.component}
+                    />
                 </Switch>
             </SecurityLayout>
         </Router>
