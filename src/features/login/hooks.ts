@@ -12,21 +12,24 @@ export const useAuthorizeActions = () => {
     return bindActionCreators(authorizeActionCreators, dispatch)
 };
 
-export const useLoginStateLoading = () => {
+export const useHandleLoginStateChange = () => {
     const history = useHistory();
     const loginState = useTypedSelector(selectLoginState)
 
     useEffect(() => {
         if (loginState.error) {
-            notification.open({
+            notification.error({
                 message: 'Login Failed',
                 description: loginState.error,
             });
         }
         if (loginState.isLogin) {
+            notification.success({
+                message: 'Login Success',
+            });
             history.push(Pages.Home.path)
         }
     }, [loginState])
 
-    return loginState.loading
+    return null
 }

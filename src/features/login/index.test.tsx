@@ -13,19 +13,19 @@ global.matchMedia = global.matchMedia || function () {
 };
 
 describe("test Login Form", () => {
-    function mockHooks(actions: any, isLoading: boolean) {
+    function mockHooks(actions: any) {
         const mockActionsSpy = jest.spyOn(MockHooks, "useAuthorizeActions");
         mockActionsSpy.mockReturnValue(actions);
 
-        const mockStateLoadingSpy = jest.spyOn(MockHooks, "useLoginStateLoading");
-        mockStateLoadingSpy.mockReturnValue(isLoading);
+        const mockStateLoadingSpy = jest.spyOn(MockHooks, "useHandleLoginStateChange");
+        mockStateLoadingSpy.mockReturnValue(null);
     }
 
     it("should show tile", async () => {
         const mockActions = {
             doLogin: jest.fn()
         }
-        mockHooks(mockActions, true)
+        mockHooks(mockActions)
 
         const wrapper = render(<LoginForm />);
 

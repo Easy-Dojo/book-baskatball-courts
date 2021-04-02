@@ -10,9 +10,6 @@ const SecurityLayout: React.FC = ({children}) => {
     const history = useHistory();
 
     useEffect(() => {
-        console.log(window.location.pathname)
-        console.log(isLogin)
-
         if (!isLogin && window.location.pathname !== Pages.Login.path) {
             history.push(Pages.Login.path)
         }
