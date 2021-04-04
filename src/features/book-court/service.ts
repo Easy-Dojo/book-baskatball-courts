@@ -6,12 +6,12 @@ export interface QueryTimeType {
   endTime: number | undefined
 }
 
-enum COURT_SUB_TYPE {
+export enum COURT_SUB_TYPE {
   LEFT,
   RIGHT
 }
 
-interface CourtType {
+export interface CourtType {
   id: string,
   court: string,
   subCourt: COURT_SUB_TYPE,

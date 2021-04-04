@@ -1,11 +1,20 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import courtsService, {QueryTimeType, SearchedCourtsType} from "./service";
+import courtsService, {CourtType, QueryTimeType} from "./service";
+
+interface CourtsStateDataType {
+    date: string,
+    startTime: number,
+    endTime: number,
+    courts: {
+        [key: string]: [CourtType, CourtType]
+    }
+}
 
 export interface CourtsState {
     loading: boolean;
     error: string | undefined;
-    data: SearchedCourtsType | undefined;
+    data: CourtsStateDataType | undefined;
 }
 
 export const initialState: CourtsState = {
@@ -14,7 +23,7 @@ export const initialState: CourtsState = {
     data: undefined
 }
 
-const queryCourts = createAsyncThunk("courts/fetchCourts", async (query:QueryTimeType) => {
+const queryCourts = createAsyncThunk("courts/fetchCourts", async (query: QueryTimeType) => {
     return await courtsService.queryCourts(query)
 });
 
@@ -34,7 +43,16 @@ export const courtsSlice = createSlice({
             .addCase(queryCourts.fulfilled, (state, action) => {
                 state.loading = false
                 state.error = undefined
-                state.data = action.payload
+                const courts = action.payload.courts
+                const data: any = {}
+                courts.forEach((court) => {
+                    if (!data[court.court]) {
+                        data[court.court] = []
+                    }
+                    data[court.court].push(court)
+                })
+
+                state.data = {...action.payload, courts: data}
             })
             .addCase(queryCourts.rejected, (state, action) => {
                 state.loading = false
