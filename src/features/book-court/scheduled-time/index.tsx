@@ -1,14 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form} from "antd";
 import moment from "moment";
 import {unavailableDate} from "./utils";
-import {useState} from "react";
 import DayPicker from "./DayPicker";
 import StartTimePicker from "./StartTimePicker";
 import EndTimePicker from "./EndTimePicker";
 import {DateType} from "./type";
 import FormSubmit from "./FormSubmit";
-import bookCourtService from '../service'
+import {useBookCourtsActions} from "../useBookCourtsActions";
 
 interface FormDataType {
     date: DateType,
@@ -18,6 +17,7 @@ interface FormDataType {
 
 const ScheduledTime: React.FC = () => {
     const [form] = Form.useForm();
+    const {queryCourts} = useBookCourtsActions()
     const [searchDate, setSearchDate] = useState<FormDataType>({
         date: undefined,
         startTime: undefined,
@@ -32,13 +32,11 @@ const ScheduledTime: React.FC = () => {
     }
 
     const onSearchCourts = async (values: FormDataType) => {
-        const queryData = {
+        queryCourts({
             date: values.date?.format("YYYY-MM-DD"),
             startTime: values.startTime?.get("hours"),
             endTime: values.endTime?.get("hours"),
-        }
-         const courts = await bookCourtService.queryCourts(queryData);
-        console.log(courts)
+        })
     }
 
     return (
