@@ -1,15 +1,13 @@
-import {Button, DatePicker, Form, TimePicker, Tooltip} from "antd";
-import moment, {Moment} from "moment";
-import {
-    getUnavailableEndHours,
-    getUnavailableStartHours,
-    isUnavailableDate
-} from "./utils";
-import {SearchOutlined} from "@ant-design/icons";
+import React from "react";
+import {Form} from "antd";
+import moment from "moment";
+import {unavailableDate} from "./utils";
 import {useState} from "react";
-
-type DateType = Moment | null | undefined;
-const TIME_FORMAT = 'HH: 00';
+import DayPicker from "./DayPicker";
+import StartTimePicker from "./StartTimePicker";
+import EndTimePicker from "./EndTimePicker";
+import {DateType} from "./type";
+import FormSubmit from "./FormSubmit";
 
 interface SearchDataType {
     date: DateType,
@@ -17,9 +15,13 @@ interface SearchDataType {
     endTime: DateType
 }
 
-function ScheduledTime() {
+const ScheduledTime: React.FC = () => {
     const [form] = Form.useForm();
-    const [searchDate, setSearchDate] = useState<SearchDataType>({date: undefined, startTime: undefined, endTime: undefined});
+    const [searchDate, setSearchDate] = useState<SearchDataType>({
+        date: undefined,
+        startTime: undefined,
+        endTime: undefined
+    });
 
     const onSearchCourts = (values: SearchDataType) => {
         console.log(values)
@@ -32,7 +34,7 @@ function ScheduledTime() {
         setSearchDate(allValues);
     }
 
-    return <div>
+    return (
         <Form
             form={form}
             name="search-available-courts"
@@ -40,53 +42,12 @@ function ScheduledTime() {
             onFinish={onSearchCourts}
             onValuesChange={onValuesChange}
         >
-            <Form.Item
-                label="Date"
-                name="date"
-                rules={[{required: true, message: "请选择日期！"}]}
-            >
-                <DatePicker
-                    disabledDate={isUnavailableDate}
-                />
-            </Form.Item>
-            <Form.Item
-                label="StartTime"
-                name="startTime"
-                rules={[{required: true, message: "请选择开始时间！"}]}
-                shouldUpdate={true}
-            >
-                <TimePicker
-                    showNow={false}
-                    bordered={false}
-                    format={TIME_FORMAT}
-                    inputReadOnly={true}
-                    disabled={!moment.isMoment(searchDate.date)}
-                    hideDisabledOptions={true}
-                    disabledHours={() => getUnavailableStartHours(moment())}
-                />
-            </Form.Item>
-            <Form.Item
-                label="EndTime"
-                name="endTime"
-                rules={[{required: true, message: "请选择结束时间！"}]}
-            >
-                <TimePicker
-                    showNow={false}
-                    bordered={false}
-                    format={TIME_FORMAT}
-                    inputReadOnly={true}
-                    disabled={!moment.isMoment(searchDate.startTime)}
-                    hideDisabledOptions={true}
-                    disabledHours={() => getUnavailableEndHours(form.getFieldValue("startTime"))}
-                />
-            </Form.Item>
-            <Form.Item>
-                <Tooltip title="search">
-                    <Button htmlType="submit" size="small" type="primary" shape="circle" icon={<SearchOutlined/>}/>
-                </Tooltip>
-            </Form.Item>
+            <DayPicker disabledDate={unavailableDate}/>
+            <StartTimePicker disabled={!moment.isMoment(searchDate.date)}/>
+            <EndTimePicker disabled={!moment.isMoment(searchDate.startTime)} startTime={searchDate.startTime}/>
+            <FormSubmit/>
         </Form>
-    </div>;
+    );
 }
 
 export default ScheduledTime

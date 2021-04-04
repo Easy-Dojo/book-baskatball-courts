@@ -1,20 +1,29 @@
-import {Form} from "antd";
+import {Form, TimePicker} from "antd";
 import React from "react";
-import {Moment} from "moment";
+import moment from "moment";
+import {getUnavailableStartHours} from "./utils";
+import {TIME_FORMAT} from "./type";
 
-interface DatePickerProps {
-    disabledDate: (current: Moment) => boolean
+interface StartTimePickerProps {
+    disabled: boolean
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({disabledDate}) => {
+const StartTimePicker: React.FC<StartTimePickerProps> = ({disabled}) => {
     return (<Form.Item
-        label="Date"
-        name="date"
-        rules={[{required: true, message: "请选择日期！"}]}
+        label="StartTime"
+        name="startTime"
+        rules={[{required: true, message: "请选择开始时间！"}]}
+        shouldUpdate={true}
     >
-        <DatePicker
-            disabledDate={disabledDate}
+        <TimePicker
+            showNow={false}
+            bordered={false}
+            format={TIME_FORMAT}
+            inputReadOnly={true}
+            disabled={disabled}
+            hideDisabledOptions={true}
+            disabledHours={() => getUnavailableStartHours(moment())}
         />
     </Form.Item>)
 }
-export default DatePicker
+export default StartTimePicker

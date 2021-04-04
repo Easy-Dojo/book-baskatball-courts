@@ -1,9 +1,10 @@
 import moment, {Moment} from "moment";
+import {DateType} from "./type";
 
 const OFF_WORK_HOUR = 22
 const LAST_HOUR_OF_DAY = 24
 
-export function isUnavailableDate(current: Moment): boolean {
+export function unavailableDate(current: Moment): boolean {
     return current && current < moment().subtract(1, 'days').endOf('day');
 }
 
@@ -34,7 +35,7 @@ export function getUnavailableStartHours(current: Moment): number[] {
     return totalHours.filter(hour => !availableHour.includes(hour) || hour === OFF_WORK_HOUR)
 }
 
-export function getUnavailableEndHours(startTime: Moment | null): number[] {
+export function getUnavailableEndHours(startTime: DateType): number[] {
     const totalHours: number[] = getTotalHoursOfDay();
     if (!startTime) {
         return totalHours

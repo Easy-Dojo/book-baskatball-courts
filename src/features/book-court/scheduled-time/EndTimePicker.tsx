@@ -1,20 +1,18 @@
 import {Form, TimePicker} from "antd";
 import React from "react";
-import moment from "moment";
-import {getUnavailableStartHours} from "./utils";
+import {getUnavailableEndHours} from "./utils";
+import {DateType, TIME_FORMAT} from "./type";
 
-interface StartTimePickerProps {
-    disabled: boolean
+interface EndTimePickerPickerProps {
+    disabled: boolean,
+    startTime: DateType
 }
 
-const TIME_FORMAT = 'HH: 00';
-
-const StartTimePicker: React.FC<StartTimePickerProps> = ({disabled}) => {
+const EndTimePicker: React.FC<EndTimePickerPickerProps> = ({disabled, startTime}) => {
     return (<Form.Item
-        label="StartTime"
-        name="startTime"
-        rules={[{required: true, message: "请选择开始时间！"}]}
-        shouldUpdate={true}
+        label="EndTime"
+        name="endTime"
+        rules={[{required: true, message: "请选择结束时间！"}]}
     >
         <TimePicker
             showNow={false}
@@ -23,8 +21,8 @@ const StartTimePicker: React.FC<StartTimePickerProps> = ({disabled}) => {
             inputReadOnly={true}
             disabled={disabled}
             hideDisabledOptions={true}
-            disabledHours={() => getUnavailableStartHours(moment())}
+            disabledHours={() => getUnavailableEndHours(startTime)}
         />
     </Form.Item>)
 }
-export default StartTimePicker
+export default EndTimePicker

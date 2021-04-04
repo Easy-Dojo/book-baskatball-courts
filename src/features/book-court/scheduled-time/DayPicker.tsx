@@ -6,16 +6,16 @@ interface DatePickerProps {
     disabledDate: (current: Moment) => boolean
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({disabledDate}) => {
+const DayPicker: React.FC<DatePickerProps> = ({disabledDate}) => {
     return (<Form.Item
         label="Date"
         name="date"
         rules={[{required: true, message: "请选择日期！"}]}
     >
-        <DatePickera
+        <DatePicker
             allowClear={false}
             disabledDate={disabledDate}
         />
     </Form.Item>)
 }
-export default DatePicker
+export default DayPicker

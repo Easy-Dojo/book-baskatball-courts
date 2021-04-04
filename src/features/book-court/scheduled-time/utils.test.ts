@@ -1,5 +1,5 @@
 import {
-    isUnavailableDate,
+    unavailableDate,
     getUnavailableEndHours,
     getUnavailableStartHours,
     getTotalHoursOfDay
@@ -9,9 +9,9 @@ import moment from "moment";
 describe("test scheduled-time utils", () => {
 
     it("isUnavailableDate", () => {
-        expect(isUnavailableDate(moment())).toBe(false);
-        expect(isUnavailableDate(moment().subtract(1, 'days'))).toBe(true);
-        expect(isUnavailableDate(moment().subtract(2, 'days'))).toBe(true);
+        expect(unavailableDate(moment())).toBe(false);
+        expect(unavailableDate(moment().subtract(1, 'days'))).toBe(true);
+        expect(unavailableDate(moment().subtract(2, 'days'))).toBe(true);
     });
 
     it("getTotalHoursOfDay", () => {
