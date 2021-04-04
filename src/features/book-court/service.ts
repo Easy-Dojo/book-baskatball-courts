@@ -1,10 +1,34 @@
 import {HttpClient} from "../../app/http/http-client";
-import {AxiosBasicCredentials} from "axios";
 
-class LoginService extends HttpClient {
-  async login(authInfo: AxiosBasicCredentials): Promise<any> {
-    return await this.instance.post("/api/authorize", authInfo).then((res) => res.data);
+interface QueryTimeType {
+  date: string | undefined,
+  startTime: number | undefined,
+  endTime: number | undefined
+}
+
+enum COURT_SUB_TYPE {
+  LEFT,
+  RIGHT
+}
+
+interface CourtType {
+  id: string,
+  court: string,
+  subCourt: COURT_SUB_TYPE,
+  isAvailable: boolean
+}
+
+interface CourtsResType {
+  date: string,
+  startTime: number,
+  endTime: number,
+  courts: CourtType[]
+}
+
+class BookCourtService extends HttpClient {
+  async queryCourts(queryTime: QueryTimeType): Promise<CourtsResType> {
+    return await this.instance.get("/api/courts", {params: queryTime}).then((res) => res.data);
   }
 }
 
-export default new LoginService();
+export default new BookCourtService();

@@ -8,8 +8,9 @@ import StartTimePicker from "./StartTimePicker";
 import EndTimePicker from "./EndTimePicker";
 import {DateType} from "./type";
 import FormSubmit from "./FormSubmit";
+import bookCourtService from '../service'
 
-interface SearchDataType {
+interface FormDataType {
     date: DateType,
     startTime: DateType,
     endTime: DateType
@@ -17,21 +18,27 @@ interface SearchDataType {
 
 const ScheduledTime: React.FC = () => {
     const [form] = Form.useForm();
-    const [searchDate, setSearchDate] = useState<SearchDataType>({
+    const [searchDate, setSearchDate] = useState<FormDataType>({
         date: undefined,
         startTime: undefined,
         endTime: undefined
     });
 
-    const onSearchCourts = (values: SearchDataType) => {
-        console.log(values)
-    }
-
-    const onValuesChange = (changedValues: any, allValues: SearchDataType) => {
+    const onValuesChange = (changedValues: any, allValues: FormDataType) => {
         if (changedValues.startTime) {
             form.setFieldsValue({...allValues, endTime: null})
         }
         setSearchDate(allValues);
+    }
+
+    const onSearchCourts = async (values: FormDataType) => {
+        const queryData = {
+            date: values.date?.format("YYYY-MM-DD"),
+            startTime: values.startTime?.get("hours"),
+            endTime: values.endTime?.get("hours"),
+        }
+         const courts = await bookCourtService.queryCourts(queryData);
+        console.log(courts)
     }
 
     return (
