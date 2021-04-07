@@ -1,39 +1,42 @@
-import {Button, Checkbox, Empty, Form} from "antd";
-import React from "react";
+import {Empty, notification, Spin} from "antd";
+import React, {useEffect, useState} from "react";
 import {useTypedSelector} from "../../../app/hooks/useTypedSelector";
 import {selectCourts} from "../courtsSlice";
-import CourtPicker from "./CourtPicker";
 import {CheckboxValueType} from "antd/lib/checkbox/Group";
+import ConfirmButton from "./ConfirmButton";
+import CourtContent from "./CourtContent";
 
 const CourtSelectionBoard: React.FC = () => {
     const {data, loading, error} = useTypedSelector(selectCourts)
+    const [selectedCourt, setSelectedCourt] = useState<Array<CheckboxValueType>>([]);
 
-    const onChange = (checkedValue: Array<CheckboxValueType>) => {
-        console.log(checkedValue)
+    const onSelectionChange = (checkedValue: Array<CheckboxValueType>) => {
+        setSelectedCourt(checkedValue);
     }
 
-    if (!data) {
-        return <Empty/>
+    const onSubmit = () => {
+        console.log(selectedCourt)
     }
 
-    const CourtContent = () =>
-        <Checkbox.Group className="court-content" onChange={onChange}>
-            {Object.keys(data.courts).map(key => <CourtPicker key={key} courtName={key} data={data.courts[key]}/>)}
-        </Checkbox.Group>
+    useEffect(() => {
+        if (error) {
+            notification.error({
+                message: '查询时间错误',
+                description: error,
+            });
+        }
+    }, [error])
 
-
-    const Submit = () => (
-        <Form.Item>
-            <Button size="large" type="primary" shape="round">
-                确认场地
-            </Button>
-        </Form.Item>
-    );
-
-    return <div>
-        <CourtContent/>
-        <Submit/>
-    </div>;
+    return <Spin spinning={loading}>
+        {
+            data
+                ? <>
+                    <CourtContent courts={data.courts} onChange={onSelectionChange}/>
+                    <ConfirmButton onSubmit={onSubmit}/>
+                </>
+                : <Empty/>
+        }
+    </Spin>;
 }
 
 export default CourtSelectionBoard

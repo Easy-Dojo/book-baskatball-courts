@@ -2,13 +2,15 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import courtsService, {CourtType, QueryTimeType} from "./service";
 
+export type Courts = {
+    [key: string]: [CourtType, CourtType]
+};
+
 interface CourtsStateDataType {
     date: string,
     startTime: number,
     endTime: number,
-    courts: {
-        [key: string]: [CourtType, CourtType]
-    }
+    courts: Courts
 }
 
 export interface CourtsState {
