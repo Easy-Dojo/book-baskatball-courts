@@ -14,7 +14,7 @@ module.exports = {
                             '@btn-padding-horizontal-base': '15px',
                             '@input-padding-horizontal': '15px',
                             '@box-shadow-base': 'unset',
-                            '@background-color-base': '#EEEEEF',
+                            '@body-background': '#EEEEEF',
                         },
                         javascriptEnabled: true,
                     },

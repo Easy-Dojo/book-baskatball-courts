@@ -3,3 +3,5 @@ fileignoreconfig:
     checksum: 5a6adae126b1bf6c061a0d84b5b9cea06779c59650ca9a461bd89a2a57acca89
   - filename: server.js
     checksum: 37487e742cbf8a6f0aec6dc2e44b834fcb156b6e631bfdabfb5e0d90f2c084e4
+  - filename: src/features/order-confirmation/order-detail/index.tsx
+    checksum: 26b355419022e9450799972662848fc63da06c1369f1582588e95862289887f6

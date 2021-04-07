@@ -3,7 +3,7 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} fro
 export class HttpClient {
     instance: AxiosInstance;
 
-    private readonly _baseURL = "./";
+    private readonly _baseURL = "/";
 
     constructor(baseURL?: string) {
         this.instance = axios.create({

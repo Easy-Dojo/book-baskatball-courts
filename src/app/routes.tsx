@@ -1,7 +1,9 @@
-import { ComponentType } from "react";
+import {ComponentType} from "react";
 import BookCourt from "../features/book-court";
 import Home from "../features/home";
 import Login from "../features/login";
+import OrderConfirmation from "../features/order-confirmation";
+import OrderResult from "../features/order-result";
 
 interface RouterConfig {
   title: string;
@@ -27,4 +29,16 @@ export class Pages {
     path: '/book-court',
     component: BookCourt,
   };
+
+  public static readonly OrderConfirmation: RouterConfig = {
+    title: "Order Confirmation Page",
+    path: '/order-confirmation',
+    component: OrderConfirmation,
+  }
+
+  public static readonly OrderResult: RouterConfig = {
+    title: "Order Result Page",
+    path: '/order-result',
+    component: OrderResult,
+  }
 }

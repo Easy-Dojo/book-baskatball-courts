@@ -4,6 +4,7 @@ import Logo from "./logo/Logo";
 import LoginForm from "./loginForm/LoginForm";
 import Footer from "./footer/Footer";
 import {useAuthorizeActions, useHandleLoginStateChange} from "./hooks";
+import './index.less';
 
 const Login: React.FC = () => {
     useHandleLoginStateChange()

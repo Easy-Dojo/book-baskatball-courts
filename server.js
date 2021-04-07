@@ -4,8 +4,10 @@ const bodyParser = require('body-parser')
 const path = require('path');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 
-const backendHost = process.env.API_ENDPOINT || 'http://localhost:8080';
 const backendConfig = {
+    target: process.env.API_ENDPOINT || 'http://localhost:8080',
+    changeOrigin: true,
+    secure: true,
     headers: {
         'x-api-key': process.env.X_API_KEY || 'testApiKey',
     },
@@ -49,17 +51,15 @@ app.use(simpleLogger);
 app.use(loginRequired);
 
 app.post('/api/authorize', createProxyMiddleware({
-    target: backendHost,
     ...backendConfig,
     onProxyRes: (proxyRes, req, res) => {
-        req.session = {username: req.body.username, expire: Date.now() + sessionAge};
+        if (proxyRes.statusCode === 200) {
+            req.session = {username: req.body.username, expire: Date.now() + sessionAge};
+        }
     }
 }));
 
-app.use('/api', createProxyMiddleware({
-    target: backendHost,
-    ...backendConfig
-}));
+app.use('/api', createProxyMiddleware(backendConfig));
 
 app.use(express.static(path.join(__dirname, './build')));
 app.get('*', (req, res) => {
