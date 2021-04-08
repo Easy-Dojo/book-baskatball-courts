@@ -2,13 +2,13 @@ import {Form, TimePicker} from "antd";
 import React from "react";
 import {getUnavailableEndHours} from "./utils";
 import {DateType, TIME_FORMAT} from "./type";
+import moment from "moment";
 
 interface EndTimePickerPickerProps {
-    disabled: boolean,
     startTime: DateType
 }
 
-const EndTimePicker: React.FC<EndTimePickerPickerProps> = ({disabled, startTime}) => {
+const EndTimePicker: React.FC<EndTimePickerPickerProps> = ({startTime}) => {
     return (<Form.Item
         label="EndTime"
         name="endTime"
@@ -19,8 +19,8 @@ const EndTimePicker: React.FC<EndTimePickerPickerProps> = ({disabled, startTime}
             bordered={false}
             format={TIME_FORMAT}
             inputReadOnly={true}
-            disabled={disabled}
             hideDisabledOptions={true}
+            disabled={!moment.isMoment(startTime)}
             disabledHours={() => getUnavailableEndHours(startTime)}
         />
     </Form.Item>)

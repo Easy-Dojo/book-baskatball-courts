@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import {Form} from "antd";
-import moment from "moment";
-import {unavailableDate} from "./utils";
 import DayPicker from "./DayPicker";
 import StartTimePicker from "./StartTimePicker";
 import EndTimePicker from "./EndTimePicker";
@@ -47,9 +45,9 @@ const ScheduledTime: React.FC = () => {
             onFinish={onSearchCourts}
             onValuesChange={onValuesChange}
         >
-            <DayPicker disabledDate={unavailableDate}/>
-            <StartTimePicker disabled={!moment.isMoment(searchDate.date)}/>
-            <EndTimePicker disabled={!moment.isMoment(searchDate.startTime)} startTime={searchDate.startTime}/>
+            <DayPicker />
+            <StartTimePicker date={searchDate.date} />
+            <EndTimePicker startTime={searchDate.startTime}/>
             <FormSubmit/>
         </Form>
     );

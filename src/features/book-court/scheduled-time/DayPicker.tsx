@@ -1,12 +1,8 @@
 import {DatePicker, Form} from "antd";
 import React from "react";
-import {Moment} from "moment";
+import {isUnavailableDate} from "./utils";
 
-interface DatePickerProps {
-    disabledDate: (current: Moment) => boolean
-}
-
-const DayPicker: React.FC<DatePickerProps> = ({disabledDate}) => {
+const DayPicker: React.FC = () => {
     return (<Form.Item
         label="Date"
         name="date"
@@ -14,7 +10,7 @@ const DayPicker: React.FC<DatePickerProps> = ({disabledDate}) => {
     >
         <DatePicker
             allowClear={false}
-            disabledDate={disabledDate}
+            disabledDate={isUnavailableDate}
         />
     </Form.Item>)
 }

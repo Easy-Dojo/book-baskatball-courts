@@ -2,13 +2,13 @@ import {Form, TimePicker} from "antd";
 import React from "react";
 import moment from "moment";
 import {getUnavailableStartHours} from "./utils";
-import {TIME_FORMAT} from "./type";
+import {DateType, TIME_FORMAT} from "./type";
 
 interface StartTimePickerProps {
-    disabled: boolean
+    date: DateType
 }
 
-const StartTimePicker: React.FC<StartTimePickerProps> = ({disabled}) => {
+const StartTimePicker: React.FC<StartTimePickerProps> = ({date}) => {
     return (<Form.Item
         label="StartTime"
         name="startTime"
@@ -20,9 +20,9 @@ const StartTimePicker: React.FC<StartTimePickerProps> = ({disabled}) => {
             bordered={false}
             format={TIME_FORMAT}
             inputReadOnly={true}
-            disabled={disabled}
+            disabled={!moment.isMoment(date)}
             hideDisabledOptions={true}
-            disabledHours={() => getUnavailableStartHours(moment())}
+            disabledHours={() => getUnavailableStartHours(moment(), date)}
         />
     </Form.Item>)
 }
