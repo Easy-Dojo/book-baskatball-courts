@@ -7,7 +7,7 @@ const {createProxyMiddleware} = require('http-proxy-middleware');
 const backendConfig = {
     target: process.env.API_ENDPOINT || 'http://localhost:8080',
     changeOrigin: true,
-    secure: true,
+    secure: false,
     headers: {
         'x-api-key': process.env.X_API_KEY || 'testApiKey',
     },
