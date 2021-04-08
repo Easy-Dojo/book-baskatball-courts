@@ -23,8 +23,11 @@ const loginSkippedPaths = [
 ];
 const isAuthorized = (session) => (!!session.username && session.expire > Date.now());
 const loginSkipped = (path) => (loginSkippedPaths.some((skippedPath) => (path.startsWith(skippedPath))));
+
 const simpleLogger = (req, res, next) => {
-    console.log(`[${new Date().toISOString()}] user: ${req.session.username || 'unauthorized'} ${req.method} ${req.path}`);
+    if (!loginSkipped(req.path)) {
+        console.log(`[${new Date().toISOString()}] user: ${req.session.username || 'unauthorized'} ${req.method} ${req.path}`);
+    }
     next();
 }
 const loginRequired = (req, res, next) => {
