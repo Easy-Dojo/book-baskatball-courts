@@ -39,7 +39,13 @@ const loginRequired = (req, res, next) => {
 }
 
 const app = express();
-app.use(bodyParser());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false}))
+
+// parse application/json
+app.use(bodyParser.json())
+
 app.use(cookieSession({
     secret: process.env.COOKIE_SECRET || 'testCookieSecret',
     maxAge: sessionAge,
@@ -58,6 +64,20 @@ app.post('/api/authorize', createProxyMiddleware({
     onProxyRes: (proxyRes, req, res) => {
         if (proxyRes.statusCode === 200) {
             req.session = {username: req.body.username, expire: Date.now() + sessionAge};
+        }
+    },
+    onProxyReq: (proxyReq, req, res) => {
+        if (!req.body || !Object.keys(req.body).length) {
+            return;
+        }
+        const contentType = proxyReq.getHeader('Content-Type');
+        const writeBody = (bodyData) => {
+            proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+        };
+
+        if (contentType.includes('application/json') || contentType.includes('application/x-www-form-urlencoded')) {
+            writeBody(JSON.stringify(req.body));
         }
     }
 }));
