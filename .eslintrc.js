@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-hooks'],
-  extends: ['airbnb-typescript', 'airbnb/hooks', 'prettier'],
+  extends: ['airbnb-typescript', 'airbnb/hooks'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

@@ -1,35 +1,23 @@
-import React from "react";
-import {Provider} from "react-redux";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {store} from './app/store'
-import {Pages} from "./app/routes";
-// import SecurityLayout from "./app/layouts/SecurityLayout";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { store } from './app/store';
+import Login from './features/login';
+import BookCourt from './features/book-court';
+import OrderConfirmation from './features/order-confirmation';
+import OrderResult from './features/order-result';
 
-const App: React.FC = () => {
-    return <Provider store={store}>
-        <Router>
-            {/*<SecurityLayout>*/}
-            <Switch>
-                <Route
-                    path={Pages.Login.path}
-                    component={Pages.Login.component}
-                />
-                <Route
-                    path={Pages.BookCourt.path}
-                    component={Pages.BookCourt.component}
-                />
-                <Route
-                    path={Pages.OrderConfirmation.path}
-                    component={Pages.OrderConfirmation.component}
-                />
-                <Route
-                    path={Pages.OrderResult.path}
-                    component={Pages.OrderResult.component}
-                />
-            </Switch>
-            {/*</SecurityLayout>*/}
-        </Router>
-    </Provider>;
-};
+const App: React.FC = () => (
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/book-court" component={BookCourt} />
+        <Route path="/order-confirmation/:orderId" component={OrderConfirmation} />
+        <Route path="/order-result" component={OrderResult} />
+      </Switch>
+    </Router>
+  </Provider>
+);
 
 export default App;
