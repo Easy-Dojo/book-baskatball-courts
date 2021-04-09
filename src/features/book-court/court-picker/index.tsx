@@ -7,6 +7,9 @@ import { selectCourts } from '../courtsSlice';
 import ConfirmButton from './ConfirmButton';
 import CourtContent from './CourtContent';
 import courtsService from '../service';
+import TimeIcon from '../../../assets/TimeIcon';
+import ContentBox from '../../../app/components/content-box';
+import PickIcon from '../../../assets/PickIcon';
 
 const CourtSelectionBoard: React.FC = () => {
   const history = useHistory();
@@ -48,16 +51,18 @@ const CourtSelectionBoard: React.FC = () => {
 
   return (
     <Spin spinning={loading}>
-      {
-            data
-              ? (
-                <>
-                  <CourtContent courts={data.courts} onChange={onSelectionChange} />
-                  <ConfirmButton onSubmit={onSubmit} />
-                </>
-              )
-              : <Empty />
+      <ContentBox icon={PickIcon} title="选择场地">
+        {
+          data
+            ? (
+              <>
+                <CourtContent courts={data.courts} onChange={onSelectionChange} />
+                <ConfirmButton onSubmit={onSubmit} />
+              </>
+            )
+            : <Empty />
         }
+      </ContentBox>
     </Spin>
   );
 };

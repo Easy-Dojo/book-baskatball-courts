@@ -4,7 +4,6 @@ import DayPicker from './DayPicker';
 import StartTimePicker from './StartTimePicker';
 import EndTimePicker from './EndTimePicker';
 import { DateType } from './type';
-import FormSubmit from './FormSubmit';
 import { useBookCourtsActions } from '../useBookCourtsActions';
 import TimeIcon from '../../../assets/TimeIcon';
 import ContentBox from '../../../app/components/content-box';
@@ -22,15 +21,7 @@ const TimeScheduler: React.FC = () => {
     date: undefined,
     startTime: undefined,
     endTime: undefined,
-
   });
-
-  const onValuesChange = (changedValues: any, allValues: FormDataType) => {
-    if (changedValues.startTime) {
-      form.setFieldsValue({ ...allValues, endTime: null });
-    }
-    setSearchDate(allValues);
-  };
 
   const onSearchCourts = async (values: FormDataType) => {
     queryCourts({
@@ -38,6 +29,20 @@ const TimeScheduler: React.FC = () => {
       startTime: values.startTime?.get('hours'),
       endTime: values.endTime?.get('hours'),
     });
+  };
+
+  const onValuesChange = async (changedValues: any, allValues: FormDataType) => {
+    if (changedValues.date) {
+      form.setFieldsValue({ ...allValues, startTime: null, endTime: null });
+      setSearchDate({ ...allValues, startTime: null, endTime: null });
+    }
+    if (changedValues.startTime) {
+      form.setFieldsValue({ ...allValues, endTime: null });
+      setSearchDate({ ...allValues, endTime: null });
+    }
+    if (changedValues.endTime && allValues.date && allValues.startTime && allValues.endTime) {
+      await onSearchCourts(allValues);
+    }
   };
 
   return (
@@ -48,7 +53,6 @@ const TimeScheduler: React.FC = () => {
         name="search-available-courts"
         layout="horizontal"
         requiredMark={false}
-        onFinish={onSearchCourts}
         onValuesChange={onValuesChange}
       >
         <DayPicker />
@@ -56,7 +60,6 @@ const TimeScheduler: React.FC = () => {
           <StartTimePicker date={searchDate.date} />
           <EndTimePicker startTime={searchDate.startTime} />
         </div>
-        <FormSubmit />
       </Form>
     </ContentBox>
   );
