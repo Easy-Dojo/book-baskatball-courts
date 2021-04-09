@@ -1,6 +1,6 @@
 fileignoreconfig:
   - filename: yarn.lock
-    checksum: 5a6adae126b1bf6c061a0d84b5b9cea06779c59650ca9a461bd89a2a57acca89
+    checksum: cacefb17de93205148e615389ce261be304e324fbf9bcf38a9712a3a4319a4bd
   - filename: server.js
     checksum: 37487e742cbf8a6f0aec6dc2e44b834fcb156b6e631bfdabfb5e0d90f2c084e4
   - filename: src/features/order-confirmation/order-detail/index.tsx
