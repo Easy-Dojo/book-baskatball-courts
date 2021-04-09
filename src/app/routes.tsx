@@ -1,6 +1,5 @@
 import {ComponentType} from "react";
 import BookCourt from "../features/book-court";
-import Home from "../features/home";
 import Login from "../features/login";
 import OrderConfirmation from "../features/order-confirmation";
 import OrderResult from "../features/order-result";
@@ -12,12 +11,6 @@ interface RouterConfig {
 }
 
 export class Pages {
-  public static readonly Home: RouterConfig = {
-    title: "Home Page",
-    path: '/',
-    component: Home,
-  };
-
   public static readonly Login: RouterConfig = {
     title: "Login Page",
     path: '/login',

@@ -27,7 +27,7 @@ export const useHandleLoginStateChange = () => {
             notification.success({
                 message: 'Login Success',
             });
-            history.push(Pages.Home.path)
+            history.push(Pages.BookCourt.path)
         }
     }, [loginState, history])
 

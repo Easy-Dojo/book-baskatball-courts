@@ -11,11 +11,6 @@ const App: React.FC = () => {
             {/*<SecurityLayout>*/}
             <Switch>
                 <Route
-                    exact
-                    path={Pages.Home.path}
-                    component={Pages.Home.component}
-                />
-                <Route
                     path={Pages.Login.path}
                     component={Pages.Login.component}
                 />
