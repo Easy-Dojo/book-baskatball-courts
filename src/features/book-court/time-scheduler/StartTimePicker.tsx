@@ -14,10 +14,10 @@ const StartTimePicker: React.FC<StartTimePickerProps> = ({date}) => {
         name="startTime"
         rules={[{required: true, message: "请选择开始时间！"}]}
         shouldUpdate={true}
+        style={{ display: 'inline-block', width: 'calc(50%)' }}
     >
         <TimePicker
             showNow={false}
-            bordered={false}
             format={TIME_FORMAT}
             inputReadOnly={true}
             disabled={!moment.isMoment(date)}

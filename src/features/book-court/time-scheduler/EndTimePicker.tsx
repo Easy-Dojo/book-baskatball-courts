@@ -13,10 +13,10 @@ const EndTimePicker: React.FC<EndTimePickerPickerProps> = ({startTime}) => {
         label="EndTime"
         name="endTime"
         rules={[{required: true, message: "请选择结束时间！"}]}
+        style={{ display: 'inline-block', width: 'calc(50%)' }}
     >
         <TimePicker
             showNow={false}
-            bordered={false}
             format={TIME_FORMAT}
             inputReadOnly={true}
             hideDisabledOptions={true}

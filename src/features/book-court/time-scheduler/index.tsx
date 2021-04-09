@@ -6,6 +6,7 @@ import EndTimePicker from "./EndTimePicker";
 import {DateType} from "./type";
 import FormSubmit from "./FormSubmit";
 import {useBookCourtsActions} from "../useBookCourtsActions";
+import TimeIcon from "../../../assets/TimeIcon";
 
 interface FormDataType {
     date: DateType,
@@ -38,18 +39,26 @@ const TimeScheduler: React.FC = () => {
     }
 
     return (
-        <Form
-            form={form}
-            name="search-available-courts"
-            layout="horizontal"
-            onFinish={onSearchCourts}
-            onValuesChange={onValuesChange}
-        >
-            <DayPicker />
-            <StartTimePicker date={searchDate.date} />
-            <EndTimePicker startTime={searchDate.startTime}/>
-            <FormSubmit/>
-        </Form>
+        <div>
+            <div><TimeIcon/> 选择时间</div>
+            <Form
+                className="time-scheduler-form"
+                form={form}
+                name="search-available-courts"
+                layout="horizontal"
+                requiredMark={false}
+                onFinish={onSearchCourts}
+                onValuesChange={onValuesChange}
+            >
+                <DayPicker/>
+                <Form.Item className="time-picker">
+                    <StartTimePicker date={searchDate.date}/>
+                    <EndTimePicker startTime={searchDate.startTime}/>
+                </Form.Item>
+                <FormSubmit/>
+            </Form>
+        </div>
+
     );
 }
 
