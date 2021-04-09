@@ -14,7 +14,7 @@ const StartTimePicker: React.FC<StartTimePickerProps> = ({ date }) => (
     name="startTime"
     rules={[{ required: true, message: '请选择开始时间！' }]}
     shouldUpdate
-    style={{ display: 'inline-block', width: 'calc(50%)' }}
+    style={{ display: 'inline-block', width: '48%' }}
   >
     <TimePicker
       showNow={false}

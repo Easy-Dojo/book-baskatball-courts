@@ -56,10 +56,10 @@ const TimeScheduler: React.FC = () => {
         onValuesChange={onValuesChange}
       >
         <DayPicker />
-        <Form.Item className="time-picker">
+        <div className="time-picker">
           <StartTimePicker date={searchDate.date} />
           <EndTimePicker startTime={searchDate.startTime} />
-        </Form.Item>
+        </div>
         <FormSubmit />
       </Form>
     </div>
