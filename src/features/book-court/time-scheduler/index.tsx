@@ -7,6 +7,7 @@ import { DateType } from './type';
 import FormSubmit from './FormSubmit';
 import { useBookCourtsActions } from '../useBookCourtsActions';
 import TimeIcon from '../../../assets/TimeIcon';
+import ContentBox from '../../../app/components/content-box';
 
 interface FormDataType {
   date: DateType,
@@ -40,12 +41,7 @@ const TimeScheduler: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>
-        <TimeIcon />
-        {' '}
-        选择时间
-      </div>
+    <ContentBox icon={TimeIcon} title="选择时间">
       <Form
         className="time-scheduler-form"
         form={form}
@@ -62,7 +58,7 @@ const TimeScheduler: React.FC = () => {
         </div>
         <FormSubmit />
       </Form>
-    </div>
+    </ContentBox>
   );
 };
 
