@@ -7,12 +7,14 @@ export interface LoginState {
     loading: boolean;
     error: string | undefined;
     isLogin: boolean;
+    userName: string
 }
 
 export const initialState: LoginState = {
     loading: false,
     error: undefined,
-    isLogin: false
+    isLogin: false,
+    userName: "李萌萌"
 }
 
 const doLogin = createAsyncThunk("authorize/doLogin", async (values: AxiosBasicCredentials) => {
