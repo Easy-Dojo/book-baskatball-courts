@@ -163,23 +163,23 @@
             "statusCode": 200,
             "body": {
               "orderId": 1,
-              "coupon": "XXXXXX",
+              "coupon": "",
               "originalAmount": 100.03,
               "timeDiscount": -10.01,
-              "couponDiscount": -10.01,
-              "amount": 80.01,
+              "couponDiscount": 0,
+              "amount": 90.02,
               "courts": [
                 {
                   "court": "A",
                   "subCourt": 1,
                   "periodHour": 2,
-                  "amount": 40.03
+                  "amount": 20.03
                 },
                 {
                   "court": "A",
                   "subCourt": 1,
                   "periodHour": 1,
-                  "amount": 60
+                  "amount": 20
                 },
                 {
                   "court": "B",
@@ -189,6 +189,117 @@
                 }
               ]
             }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders/2",
+            "method": "GET"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": {
+              "orderId": 1,
+              "coupon": "",
+              "originalAmount": 100.03,
+              "timeDiscount": -10.01,
+              "couponDiscount": 0,
+              "amount": 90.02,
+              "courts": [
+                {
+                  "court": "C",
+                  "subCourt": 1,
+                  "periodHour": 2,
+                  "amount": 20.03
+                },
+                {
+                  "court": "C",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 20
+                },
+                {
+                  "court": "D",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 60
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders/1/coupon",
+            "method": "PUT",
+            "body": {
+              "coupon": "abcd"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": {
+              "orderId": 1,
+              "coupon": "abcd",
+              "originalAmount": 100.03,
+              "timeDiscount": -10.01,
+              "couponDiscount": -10.01,
+              "amount": 80.01,
+              "courts": [
+                {
+                  "court": "A",
+                  "subCourt": 1,
+                  "periodHour": 2,
+                  "amount": 20.03
+                },
+                {
+                  "court": "A",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 20
+                },
+                {
+                  "court": "B",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 60
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders/1/confirm",
+            "method": "POST"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": "OK"
           }
         }
       ]

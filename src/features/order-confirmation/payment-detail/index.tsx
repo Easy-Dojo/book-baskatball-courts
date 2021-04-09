@@ -3,16 +3,19 @@ import { RightOutlined, SmileFilled } from '@ant-design/icons';
 import { Card, Divider, Row } from 'antd';
 import './index.less';
 import Coupon from '../coupon';
+import { Order } from '../service';
 
 interface Props {
   originalAmount: number,
   timeDiscount: number,
   couponDiscount: number,
   amount: number,
+  coupon: string,
+  checkCoupon(newCoupon:string): Promise<void>
 }
 
 const PaymentDetail: React.FC<Props> = ({
-  originalAmount, timeDiscount, couponDiscount, amount,
+  originalAmount, timeDiscount, couponDiscount, amount, coupon, checkCoupon,
 }: Props) => {
   const [showCoupon, setShowCoupon] = useState(false);
   const onClickCoupon = () => {
@@ -35,24 +38,25 @@ const PaymentDetail: React.FC<Props> = ({
         <Divider />
         <Row justify="space-between" className="smaller-font">
           <span>预定时长优惠</span>
-          <span>{`￥${timeDiscount}`}</span>
+          <span className="highlight">{`￥${timeDiscount}`}</span>
         </Row>
         <Row justify="space-between" className="smaller-font" onClick={onClickCoupon}>
           <span>优惠券</span>
           <span>
-            {`￥${couponDiscount}`}
+            <span className="highlight">{`￥${couponDiscount}`}</span>
             {' '}
-            <RightOutlined />
+            <RightOutlined style={{ color: '@text-color' }} />
           </span>
         </Row>
         <Divider dashed />
         <Row justify="space-between">
           <span>应付金额</span>
-          <span>{`￥${amount}`}</span>
+          <span className="highlight">{`￥${amount}`}</span>
         </Row>
       </Card>
       <Coupon
-        checkCoupon={(coupon) => { console.log(coupon); }}
+        coupon={coupon}
+        checkCoupon={checkCoupon}
         onClose={onCloseCoupon}
         visible={showCoupon}
       />

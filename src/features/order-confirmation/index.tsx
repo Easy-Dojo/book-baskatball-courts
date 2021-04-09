@@ -1,5 +1,5 @@
 import {
-  Button, Row, Space, Spin,
+  Button, notification, Row, Space, Spin,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import './index.less';
@@ -29,11 +29,36 @@ const OrderConfirmation: React.FC<Props> = ({ match: { params: { orderId } } }: 
   }, [orderId]);
 
   const confirm = () => {
-    window.location.assign('/order-result');
+    orderConfirmationService.confirmOrder(orderId).then(() => {
+      window.location.assign('/order-result');
+    }).catch((error) => {
+      notification.error({
+        message: '预约失败',
+        description: error.message,
+      });
+    });
   };
 
   const cancel = () => {
     window.location.assign('/book-court');
+  };
+
+  const checkCoupon = (newCoupon: string) => {
+    setLoading(true);
+    return orderConfirmationService.updateOrderCoupon(orderId, newCoupon).then((receivedOrder) => {
+      setOrder(receivedOrder);
+      notification.success({
+        message: '优惠成功',
+        description: '优惠金额已扣减',
+      });
+    }).catch((error) => {
+      notification.error({
+        message: '优惠券不可用',
+        description: error.message,
+      });
+    }).finally(() => {
+      setLoading(false);
+    });
   };
 
   return (
@@ -44,6 +69,8 @@ const OrderConfirmation: React.FC<Props> = ({ match: { params: { orderId } } }: 
             <Space direction="vertical" size="large">
               <OrderDetail order={order} />
               <PaymentDetail
+                coupon={order.coupon}
+                checkCoupon={checkCoupon}
                 originalAmount={order.originalAmount}
                 timeDiscount={order.timeDiscount}
                 couponDiscount={order.couponDiscount}
