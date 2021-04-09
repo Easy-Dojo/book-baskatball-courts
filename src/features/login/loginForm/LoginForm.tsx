@@ -32,7 +32,7 @@ const Password = () => (
 
 const Submit = () => (
     <Form.Item>
-        <Button size="large" type="primary" shape="round" htmlType="submit" className="login-form-button">
+        <Button size="large" type="primary" block htmlType="submit" className="login-form-button">
             登录
         </Button>
     </Form.Item>
