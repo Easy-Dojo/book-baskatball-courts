@@ -13,7 +13,7 @@ interface FormDataType {
     endTime: DateType
 }
 
-const ScheduledTime: React.FC = () => {
+const TimeScheduler: React.FC = () => {
     const [form] = Form.useForm();
     const {queryCourts} = useBookCourtsActions()
     const [searchDate, setSearchDate] = useState<FormDataType>({
@@ -53,4 +53,4 @@ const ScheduledTime: React.FC = () => {
     );
 }
 
-export default ScheduledTime
+export default TimeScheduler
