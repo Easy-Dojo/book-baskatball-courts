@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import courtsService, {CourtType, QueryTimeType} from "./service";
+import courtsService, {BookCourtsRequestType, CourtType, QueryTimeType} from "./service";
 
 export type Courts = {
     [key: string]: [CourtType, CourtType]
@@ -25,7 +25,7 @@ export const initialState: CourtsState = {
     data: undefined
 }
 
-const queryCourts = createAsyncThunk("courts/fetchCourts", async (query: QueryTimeType) => {
+const queryCourts = createAsyncThunk("courts/queryCourts", async (query: QueryTimeType) => {
     return await courtsService.queryCourts(query)
 });
 

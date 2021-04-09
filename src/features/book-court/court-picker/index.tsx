@@ -5,17 +5,38 @@ import {selectCourts} from "../courtsSlice";
 import {CheckboxValueType} from "antd/lib/checkbox/Group";
 import ConfirmButton from "./ConfirmButton";
 import CourtContent from "./CourtContent";
+import courtsService from "../service";
+import {useHistory} from "react-router-dom";
+import {Pages} from "../../../app/routes";
 
 const CourtSelectionBoard: React.FC = () => {
+    const history = useHistory()
     const {data, loading, error} = useTypedSelector(selectCourts)
-    const [selectedCourt, setSelectedCourt] = useState<Array<CheckboxValueType>>([]);
+    const [selectedCourts, setSelectedCourts] = useState<Array<CheckboxValueType>>([]);
+
 
     const onSelectionChange = (checkedValue: Array<CheckboxValueType>) => {
-        setSelectedCourt(checkedValue);
+        setSelectedCourts(checkedValue);
     }
 
-    const onSubmit = () => {
-        console.log(selectedCourt)
+    const onSubmit = async () => {
+        if (data) {
+            const {date, startTime, endTime} = data;
+            const params = {
+                date,
+                startTime,
+                endTime,
+                selectedCourts
+            }
+            const {orderId} = await courtsService.bookCourts(params).catch((err)=>{
+                notification.error({
+                    message: '定场失败',
+                    description: err.message,
+                });
+            })
+
+            history.push(`${Pages.OrderResult.path}/${orderId}`)
+        }
     }
 
     useEffect(() => {
