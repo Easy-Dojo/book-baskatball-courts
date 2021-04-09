@@ -4,19 +4,26 @@ import Logo from "./logo/Logo";
 import LoginForm from "./loginForm/LoginForm";
 import {useAuthorizeActions, useHandleLoginStateChange} from "./hooks";
 import './index.less';
+import {useTypedSelector} from "../../app/hooks/useTypedSelector";
+import {selectLoginState} from "./authorizeSlice";
+import {Spin} from "antd";
 
 const Login: React.FC = () => {
     useHandleLoginStateChange()
     const {doLogin} = useAuthorizeActions()
+    const {isLogin, loading} = useTypedSelector(selectLoginState)
+
     const onFinish = (values: AxiosBasicCredentials) => {
         doLogin(values);
     }
 
     return (
-        <div className="login-layout">
-            <Logo/>
-            <LoginForm onFinish={onFinish}/>
-        </div>
+        <Spin spinning={!isLogin && loading}>
+            <div className="login-layout">
+                <Logo/>
+                <LoginForm onFinish={onFinish}/>
+            </div>
+        </Spin>
     )
 }
 export default Login;
