@@ -149,6 +149,51 @@
       ]
     },
     {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders/1",
+            "method": "GET"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "body": {
+              "orderId": 1,
+              "coupon": "XXXXXX",
+              "originalAmount": 100.03,
+              "timeDiscount": -10.01,
+              "couponDiscount": -10.01,
+              "amount": 80.01,
+              "courts": [
+                {
+                  "court": "A",
+                  "subCourt": 1,
+                  "periodHour": 2,
+                  "amount": 40.03
+                },
+                {
+                  "court": "A",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 60
+                },
+                {
+                  "court": "B",
+                  "subCourt": 1,
+                  "periodHour": 1,
+                  "amount": 60
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
       "responses": [
         {
           "is": {

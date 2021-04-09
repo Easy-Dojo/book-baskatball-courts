@@ -25,7 +25,7 @@ export class Pages {
 
   public static readonly OrderConfirmation: RouterConfig = {
     title: "Order Confirmation Page",
-    path: '/order-confirmation',
+    path: '/order-confirmation/:orderId',
     component: OrderConfirmation,
   }
 

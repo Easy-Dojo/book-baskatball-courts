@@ -23,7 +23,7 @@ const App: React.FC = () => {
                     component={Pages.OrderConfirmation.component}
                 />
                 <Route
-                    path={`${Pages.OrderResult.path}/:orderId`}
+                    path={Pages.OrderResult.path}
                     component={Pages.OrderResult.component}
                 />
             </Switch>
