@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import {
-  Button, Col, Row, Space, Spin,
+  Button, Row, Space, Spin,
 } from 'antd';
-import OrderDetail from './order-detail';
-import orderConfirmationService from './service';
+import React, { useEffect, useState } from 'react';
 import './index.less';
+import OrderDetail from './order-detail';
 import PaymentDetail from './payment-detail';
+import orderConfirmationService from './service';
 
 interface Props {
   match: {
@@ -31,6 +31,11 @@ const OrderConfirmation: React.FC<Props> = ({ match: { params: { orderId } } }: 
   const confirm = () => {
     window.location.assign('/order-result');
   };
+
+  const cancel = () => {
+    window.location.assign('/book-court');
+  };
+
   return (
     <Spin size="large" spinning={loading}>
       <div className="order-confirmation-layout">
@@ -45,13 +50,9 @@ const OrderConfirmation: React.FC<Props> = ({ match: { params: { orderId } } }: 
                 amount={order.amount}
               />
             </Space>
-            <Row gutter={6}>
-              <Col span={12}>
-                <Button block size="large">取消</Button>
-              </Col>
-              <Col span={12}>
-                <Button block type="primary" size="large" onClick={confirm}>确认预定</Button>
-              </Col>
+            <Row gutter={6} className="button-container">
+              <Button size="large" onClick={cancel}>取消</Button>
+              <Button type="primary" size="large" onClick={confirm}>确认预定</Button>
             </Row>
           </>
         )}

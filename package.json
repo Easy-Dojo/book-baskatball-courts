@@ -53,9 +53,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently yarn:frontend yarn:backend",
-    "frontend": "craco start",
+    "frontend": "DISABLE_ESLINT_PLUGIN=true craco start",
     "backend": "concurrently mb \"sleep 5 && curl -X POST -d @backend.json http://localhost:2525/imposters\"",
-    "build": "craco build",
+    "build": "DISABLE_ESLINT_PLUGIN=true craco build",
     "test": "craco test",
     "lint": "eslint src --fix"
   },
