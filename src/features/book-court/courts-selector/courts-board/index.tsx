@@ -2,14 +2,14 @@ import { Checkbox, Empty } from 'antd';
 import React from 'react';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import CourtPicker from './CourtPicker';
-import { Courts } from '../courtsSlice';
+import { Courts } from '../../courtsSlice';
 
 interface CourtContentProps {
   onChange: (checkedValue: Array<CheckboxValueType>) => void;
   courts: Courts | undefined
 }
 
-const CourtContent: React.FC<CourtContentProps> = ({ onChange, courts }) => (
+const CourtsBoard: React.FC<CourtContentProps> = ({ onChange, courts }) => (
   <div className="court-content-box">
     {!courts && <Empty />}
     {courts && (
@@ -21,4 +21,4 @@ const CourtContent: React.FC<CourtContentProps> = ({ onChange, courts }) => (
   </div>
 );
 
-export default CourtContent;
+export default CourtsBoard;

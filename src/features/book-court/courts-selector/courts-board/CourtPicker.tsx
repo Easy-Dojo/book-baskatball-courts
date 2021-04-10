@@ -1,5 +1,5 @@
 import React from 'react';
-import { COURT_SUB_TYPE, CourtType } from '../service';
+import { COURT_SUB_TYPE, CourtType } from '../../service';
 import LeftCourt from './LeftCourt';
 import RightCourt from './RightCourt';
 

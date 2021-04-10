@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, useState } from 'react';
-import RightCourtDisabled from '../../../assets/RightCourtDisabled';
-import RightCourtAvailable from '../../../assets/RightCourtAvailable';
-import RightCourtSelected from '../../../assets/RightCourtSelected';
+import RightCourtDisabled from '../../../../assets/RightCourtDisabled';
+import RightCourtSelected from '../../../../assets/RightCourtSelected';
+import RightCourtAvailable from '../../../../assets/RightCourtAvailable';
 
 interface RightCourtProps {
   value: string,

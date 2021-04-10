@@ -5,11 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../../app/hooks/useTypedSelector';
 import { selectCourts } from '../courtsSlice';
 import ConfirmButton from './ConfirmButton';
-import CourtContent from './CourtContent';
 import courtsService from '../service';
 import ContentBox from '../../../app/components/content-box';
 import PickIcon from '../../../assets/PickIcon';
 import Description from './Description';
+import CourtsBoard from './courts-board';
 
 const CourtSelectionBoard: React.FC = () => {
   const history = useHistory();
@@ -54,7 +54,7 @@ const CourtSelectionBoard: React.FC = () => {
       <ContentBox icon={PickIcon} title="选择场地">
         <div className="court-selection-board">
           <Description />
-          <CourtContent courts={data && data.courts} onChange={onSelectionChange} />
+          <CourtsBoard courts={data && data.courts} onChange={onSelectionChange} />
           {data && <ConfirmButton onSubmit={onSubmit} />}
         </div>
       </ContentBox>
