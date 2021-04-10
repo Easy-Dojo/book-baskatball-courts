@@ -30,7 +30,35 @@
   }
 }
 
-.court-content{
-  display: grid !important;
-  grid-template-columns: 50% 50%
+.court-selection-board{
+  .description{
+    ul {
+      color: #9695A8;
+      padding-left: 0;
+    }
+  }
+
+  .court-content-box{
+    background-color: #FFF;
+    border-radius: 10px;
+    min-height: 300px;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+
+    .court-content{
+      display: grid;
+      grid-template-columns: 50% 50%;
+
+      .court-picker {
+        display: flex;
+        margin: 0 auto 20px;
+        .court-name{
+          margin: 0 10px;
+        }
+        .court{
+          display: flex;
+        }
+      }
+    }
+  }
 }

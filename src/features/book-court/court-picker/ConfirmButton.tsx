@@ -7,7 +7,7 @@ interface ConfirmButtonProps {
 
 const ConfirmButton: React.FC<ConfirmButtonProps> = ({ onSubmit }) => (
   <Form.Item>
-    <Button size="large" type="primary" shape="round" onClick={onSubmit}>
+    <Button size="large" type="primary" block onClick={onSubmit}>
       确认场地
     </Button>
   </Form.Item>
