@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import courtsService, { CourtType, QueryTimeType } from './service';
+import courtsService, { BookCourtsRequestType, CourtType, QueryTimeType } from './service';
 import { RootState } from '../../app/store';
 
 export type Courts = {
@@ -15,19 +15,25 @@ interface CourtsStateDataType {
 
 export interface CourtsState {
   loading: boolean;
-  error: string | undefined;
+  queryCourtsError: string | undefined;
+  bookCourtsError: string | undefined;
+  bookCourtsOrder: { orderId: number } | undefined;
   searchedCourts: CourtsStateDataType | undefined;
   selectedSubCourtIds: string[]
 }
 
 export const initialState: CourtsState = {
   loading: false,
-  error: undefined,
+  queryCourtsError: undefined,
+  bookCourtsError: undefined,
+  bookCourtsOrder: undefined,
   searchedCourts: undefined,
   selectedSubCourtIds: [],
 };
 
 const queryCourts = createAsyncThunk('courts/queryCourts', async (query: QueryTimeType) => courtsService.queryCourts(query));
+
+const bookCourts = createAsyncThunk('courts/bookCourts', async (bookCourtsRequest: BookCourtsRequestType) => courtsService.bookCourts(bookCourtsRequest));
 
 export const courtsSlice = createSlice({
   name: 'courts',
@@ -46,12 +52,12 @@ export const courtsSlice = createSlice({
     builder
       .addCase(queryCourts.pending, (state) => {
         state.loading = true;
-        state.error = undefined;
+        state.queryCourtsError = undefined;
         state.searchedCourts = undefined;
       })
       .addCase(queryCourts.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = undefined;
+        state.queryCourtsError = undefined;
         const { courts } = action.payload;
         const data: any = {};
         courts.forEach((court) => {
@@ -65,14 +71,30 @@ export const courtsSlice = createSlice({
       })
       .addCase(queryCourts.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.queryCourtsError = action.error.message;
         state.searchedCourts = undefined;
+      })
+      .addCase(bookCourts.pending, (state) => {
+        state.loading = true;
+        state.bookCourtsError = undefined;
+        state.bookCourtsOrder = undefined;
+      })
+      .addCase(bookCourts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bookCourtsError = undefined;
+        state.bookCourtsOrder = action.payload;
+      })
+      .addCase(bookCourts.rejected, (state, action) => {
+        state.loading = false;
+        state.bookCourtsError = action.error.message;
+        state.bookCourtsOrder = undefined;
       });
   },
 });
 
 export const courtsActionCreators = {
   queryCourts,
+  bookCourts,
   changeSubCourtSelect: courtsSlice.actions.changeSubCourtSelect,
 };
 

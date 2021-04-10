@@ -1,20 +1,21 @@
-import { notification, Spin } from 'antd';
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Spin } from 'antd';
+import React from 'react';
 import { useTypedSelector } from '../../../app/hooks/useTypedSelector';
 import { selectCourts } from '../courtsSlice';
 import ConfirmButton from './ConfirmButton';
-import courtsService from '../service';
 import ContentBox from '../../../app/components/content-box';
 import PickIcon from '../../../assets/PickIcon';
 import Description from './Description';
 import CourtsBoard from './courts-board';
+import { useHandleActionResult } from './hooks';
+import { useBookCourtsActions } from '../useBookCourtsActions';
 
 const CourtSelector: React.FC = () => {
-  const history = useHistory();
+  useHandleActionResult();
   const {
-    searchedCourts, selectedSubCourtIds, loading, error,
+    searchedCourts, selectedSubCourtIds, loading,
   } = useTypedSelector(selectCourts);
+  const { bookCourts } = useBookCourtsActions();
 
   const onSubmit = async () => {
     if (searchedCourts && selectedSubCourtIds.length > 0) {
@@ -25,27 +26,9 @@ const CourtSelector: React.FC = () => {
         endTime,
         selectedCourts: selectedSubCourtIds,
       };
-      const resData = await courtsService.bookCourts(params).catch((err) => {
-        notification.error({
-          message: '定场失败',
-          description: err.message,
-        });
-      });
-
-      if (resData) {
-        history.push(`/order-confirmation/${resData.orderId}`);
-      }
+      bookCourts(params);
     }
   };
-
-  useEffect(() => {
-    if (error) {
-      notification.error({
-        message: '查询时间错误',
-        description: error,
-      });
-    }
-  }, [error]);
 
   return (
     <Spin spinning={loading}>
