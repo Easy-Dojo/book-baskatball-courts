@@ -9,6 +9,7 @@ describe('test authorizeSlice reducer', () => {
       loading: true,
       error: undefined,
       isLogin: false,
+      userName: '李萌萌',
     };
     expect(authorizeSlice.reducer(initialState, action)).toStrictEqual(expectResult);
   });
@@ -20,6 +21,7 @@ describe('test authorizeSlice reducer', () => {
       loading: false,
       error: undefined,
       isLogin: true,
+      userName: '李萌萌',
     };
     expect(authorizeSlice.reducer(initialState, action)).toStrictEqual(expectResult);
   });
@@ -31,6 +33,7 @@ describe('test authorizeSlice reducer', () => {
       loading: false,
       error: 'error',
       isLogin: false,
+      userName: '李萌萌',
     };
     expect(authorizeSlice.reducer(initialState, action)).toStrictEqual(expectResult);
   });
