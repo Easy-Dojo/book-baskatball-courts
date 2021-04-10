@@ -1,22 +1,28 @@
-import { Checkbox, Empty } from 'antd';
+import { Empty } from 'antd';
 import React from 'react';
-import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import CourtPicker from './CourtPicker';
 import { Courts } from '../../courtsSlice';
 
 interface CourtContentProps {
-  onChange: (checkedValue: Array<CheckboxValueType>) => void;
   courts: Courts | undefined
+  selectedSubCourtIds: string[]
 }
 
-const CourtsBoard: React.FC<CourtContentProps> = ({ onChange, courts }) => (
+const CourtsBoard: React.FC<CourtContentProps> = ({ courts, selectedSubCourtIds }) => (
   <div className="court-content-box">
     {!courts && <Empty />}
     {courts && (
-    <Checkbox.Group className="court-content" onChange={onChange}>
+    <div className="court-content">
       {Object.keys(courts)
-        .map((key) => <CourtPicker key={key} courtName={key} data={courts[key]} />)}
-    </Checkbox.Group>
+        .map((key) => (
+          <CourtPicker
+            key={key}
+            courtName={key}
+            data={courts[key]}
+            selectedSubCourtIds={selectedSubCourtIds}
+          />
+        ))}
+    </div>
     )}
   </div>
 );

@@ -1,6 +1,5 @@
 import { notification, Spin } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { CheckboxValueType } from 'antd/lib/checkbox/Group';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../../app/hooks/useTypedSelector';
 import { selectCourts } from '../courtsSlice';
@@ -11,32 +10,31 @@ import PickIcon from '../../../assets/PickIcon';
 import Description from './Description';
 import CourtsBoard from './courts-board';
 
-const CourtSelectionBoard: React.FC = () => {
+const CourtSelector: React.FC = () => {
   const history = useHistory();
-  const { data, loading, error } = useTypedSelector(selectCourts);
-  const [selectedCourts, setSelectedCourts] = useState<Array<CheckboxValueType>>([]);
-
-  const onSelectionChange = (checkedValue: Array<CheckboxValueType>) => {
-    setSelectedCourts(checkedValue);
-  };
+  const {
+    searchedCourts, selectedSubCourtIds, loading, error,
+  } = useTypedSelector(selectCourts);
 
   const onSubmit = async () => {
-    if (data) {
-      const { date, startTime, endTime } = data;
+    if (searchedCourts && selectedSubCourtIds.length > 0) {
+      const { date, startTime, endTime } = searchedCourts;
       const params = {
         date,
         startTime,
         endTime,
-        selectedCourts,
+        selectedCourts: selectedSubCourtIds,
       };
-      const { orderId } = await courtsService.bookCourts(params).catch((err) => {
+      const resData = await courtsService.bookCourts(params).catch((err) => {
         notification.error({
           message: '定场失败',
           description: err.message,
         });
       });
 
-      history.push(`/order-confirmation/${orderId}`);
+      if (resData) {
+        history.push(`/order-confirmation/${resData.orderId}`);
+      }
     }
   };
 
@@ -54,12 +52,15 @@ const CourtSelectionBoard: React.FC = () => {
       <ContentBox icon={PickIcon} title="选择场地">
         <div className="court-selection-board">
           <Description />
-          <CourtsBoard courts={data && data.courts} onChange={onSelectionChange} />
-          {data && <ConfirmButton onSubmit={onSubmit} />}
+          <CourtsBoard
+            courts={searchedCourts && searchedCourts.courts}
+            selectedSubCourtIds={selectedSubCourtIds}
+          />
+          {searchedCourts && <ConfirmButton onSubmit={onSubmit} />}
         </div>
       </ContentBox>
     </Spin>
   );
 };
 
-export default CourtSelectionBoard;
+export default CourtSelector;

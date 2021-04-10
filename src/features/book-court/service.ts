@@ -1,5 +1,4 @@
-import {HttpClient} from "../../app/http/http-client";
-import {CheckboxValueType} from "antd/lib/checkbox/Group";
+import { HttpClient } from '../../app/http/http-client';
 
 export interface QueryTimeType {
   date: string | undefined,
@@ -7,15 +6,15 @@ export interface QueryTimeType {
   endTime: number | undefined
 }
 
-export enum COURT_SUB_TYPE {
+export enum CourtSubType {
   LEFT,
-  RIGHT
+  RIGHT,
 }
 
 export interface CourtType {
   id: string,
   court: string,
-  subCourt: COURT_SUB_TYPE,
+  subCourt: CourtSubType,
   isAvailable: boolean
 }
 
@@ -30,16 +29,16 @@ export interface BookCourtsRequestType {
   date: string,
   startTime: number,
   endTime: number,
-  selectedCourts: Array<CheckboxValueType>
+  selectedCourts: string[]
 }
 
 class BookCourtService extends HttpClient {
   async queryCourts(queryTime: QueryTimeType): Promise<SearchedCourtsType> {
-    return await this.instance.get("/api/courts", {params: queryTime}).then((res) => res.data);
+    return this.instance.get('/api/courts', { params: queryTime }).then((res) => res.data);
   }
 
   async bookCourts(bookCourtsRequest: BookCourtsRequestType): Promise<any> {
-    return await this.instance.post("/api/courts", bookCourtsRequest).then((res) => res.data);
+    return this.instance.post('/api/orders', bookCourtsRequest).then((res) => res.data);
   }
 }
 

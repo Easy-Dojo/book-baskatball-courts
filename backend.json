@@ -44,77 +44,77 @@
             "statusCode": 200,
             "body": {
               "date": "2021-05-01",
-              "startTime": 16,
+              "startTime": 19,
               "endTime": 20,
               "courts": [
                 {
-                  "id": "A1",
+                  "id": 1,
                   "court": "A",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "A2",
+                  "id": 2,
                   "court": "A",
                   "subCourt": 1,
                   "isAvailable": false
                 },
                 {
-                  "id": "B1",
+                  "id": 3,
                   "court": "B",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "B2",
+                  "id": 4,
                   "court": "B",
                   "subCourt": 1,
                   "isAvailable": false
                 },
                 {
-                  "id": "C1",
+                  "id": 5,
                   "court": "C",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "C2",
+                  "id": 6,
                   "court": "C",
                   "subCourt": 1,
                   "isAvailable": false
                 },
                 {
-                  "id": "D1",
+                  "id": 7,
                   "court": "D",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "D2",
+                  "id": 8,
                   "court": "D",
                   "subCourt": 1,
                   "isAvailable": false
                 },
                 {
-                  "id": "E1",
+                  "id": 9,
                   "court": "E",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "E2",
+                  "id": 10,
                   "court": "E",
                   "subCourt": 1,
                   "isAvailable": false
                 },
                 {
-                  "id": "F1",
+                  "id": 11,
                   "court": "F",
                   "subCourt": 0,
                   "isAvailable": true
                 },
                 {
-                  "id": "F2",
+                  "id": 12,
                   "court": "F",
                   "subCourt": 1,
                   "isAvailable": false
@@ -144,6 +144,33 @@
           "is": {
             "statusCode": 400,
             "body": "Bad Request"
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "matches": {
+            "path": "/api/orders",
+            "method": "POST",
+            "body": {
+              "date": "2021-05-01",
+              "startTime": 19,
+              "endTime": 20,
+              "selectedCourts": [1]
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "body": {
+              "orderId": 1,
+              "coupon": null
+            }
           }
         }
       ]

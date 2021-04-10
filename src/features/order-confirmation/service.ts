@@ -1,5 +1,5 @@
 import { HttpClient } from '../../app/http/http-client';
-import { COURT_SUB_TYPE } from '../book-court/service';
+import { CourtSubType } from '../book-court/service';
 
 export interface Order {
   orderId: string,
@@ -10,7 +10,7 @@ export interface Order {
   amount: number,
   courts: {
     court: string,
-    subCourt: COURT_SUB_TYPE | null,
+    subCourt: CourtSubType | null,
     periodHour: number,
     amount: number,
   }[]

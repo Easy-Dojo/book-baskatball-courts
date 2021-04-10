@@ -1,18 +1,20 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler } from 'react';
 import LeftCourtDisabled from '../../../../assets/LeftCourtDisabled';
 import LeftCourtSelected from '../../../../assets/LeftCourtSelected';
 import LeftCourtAvailable from '../../../../assets/LeftCourtAvailable';
+import { useBookCourtsActions } from '../../useBookCourtsActions';
 
 interface LeftCourtProps {
   value: string,
   disabled: boolean,
+  selected: boolean
 }
 
-const LeftCourt: React.FC<LeftCourtProps> = ({ disabled, value }) => {
-  const [selected, setSelected] = useState(false);
+const LeftCourt: React.FC<LeftCourtProps> = ({ disabled, value, selected }) => {
+  const { changeSubCourtSelect } = useBookCourtsActions();
 
   const onClick:MouseEventHandler = () => {
-    setSelected(!selected);
+    changeSubCourtSelect(value);
   };
 
   if (disabled) {

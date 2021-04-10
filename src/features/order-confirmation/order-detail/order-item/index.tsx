@@ -1,10 +1,10 @@
 import React from 'react';
-import { COURT_SUB_TYPE } from '../../../book-court/service';
+import { CourtSubType } from '../../../book-court/service';
 import './index.less';
 
 interface Props {
   court: string,
-  subCourt: COURT_SUB_TYPE | null,
+  subCourt: CourtSubType | null,
   hours: number,
   amount: number,
 }

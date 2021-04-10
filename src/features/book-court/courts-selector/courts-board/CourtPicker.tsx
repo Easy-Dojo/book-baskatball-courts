@@ -1,24 +1,27 @@
 import React from 'react';
-import { COURT_SUB_TYPE, CourtType } from '../../service';
+import { CourtSubType, CourtType } from '../../service';
 import LeftCourt from './LeftCourt';
 import RightCourt from './RightCourt';
 
 interface CourtPickerProp {
   courtName: string,
   data: [CourtType, CourtType],
+  selectedSubCourtIds: string[];
 }
 
-const CourtPicker:React.FC<CourtPickerProp> = ({ courtName, data }) => (
+const CourtPicker:React.FC<CourtPickerProp> = ({ courtName, data, selectedSubCourtIds }) => (
   <div className="court-picker">
     <h3 className="court-name">{courtName}</h3>
     <div className="court">
       <LeftCourt
-        value={data[COURT_SUB_TYPE.LEFT].id}
-        disabled={!data[COURT_SUB_TYPE.LEFT].isAvailable}
+        value={data[CourtSubType.LEFT].id}
+        disabled={!data[CourtSubType.LEFT].isAvailable}
+        selected={selectedSubCourtIds.includes(data[CourtSubType.LEFT].id)}
       />
       <RightCourt
-        value={data[COURT_SUB_TYPE.RIGHT].id}
-        disabled={!data[COURT_SUB_TYPE.RIGHT].isAvailable}
+        value={data[CourtSubType.RIGHT].id}
+        disabled={!data[CourtSubType.RIGHT].isAvailable}
+        selected={selectedSubCourtIds.includes(data[CourtSubType.RIGHT].id)}
       />
     </div>
   </div>
